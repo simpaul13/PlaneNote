@@ -42,7 +42,7 @@ return [
 
         'customer' => [
             'driver' => 'session',
-            'provider' => 'customer_login_credentials',
+            'provider' => 'customers',
         ],
     ],
 
@@ -69,7 +69,7 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'customer_login_credentials' => [
+        'customers' => [
             'driver' => 'eloquent',
             'model' => App\Models\CustomerLoginCredential::class,
         ],

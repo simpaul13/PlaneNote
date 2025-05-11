@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\StaffAuthController;
+use App\Http\Controllers\CustomerAuthController;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -56,4 +58,24 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+});
+
+// Staff Authentication Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/staff/login', [StaffAuthController::class, 'showLoginForm'])->name('staff.login');
+    Route::post('/staff/login', [StaffAuthController::class, 'login']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/staff/logout', [StaffAuthController::class, 'logout'])->name('staff.logout');
+});
+
+// Customer Authentication Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/customer/login', [CustomerAuthController::class, 'showLoginForm'])->name('customer.login');
+    Route::post('/customer/login', [CustomerAuthController::class, 'login']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
 });
