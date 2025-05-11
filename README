@@ -1,0 +1,106 @@
+# PlaneNote
+
+PlaneNote is a full-stack application built with Laravel, React, Tailwind CSS, and Vite. It supports separate login systems for staff and customers.
+
+## Features
+
+- **Staff Authentication:** Uses the `users` table.
+- **Customer Authentication:** Uses separate customer login credentials.
+- **React UI:** Developed with React and styled using Tailwind CSS.
+- **Modern Build Tool:** Powered by Vite for fast development.
+
+## Requirements
+
+- PHP 8.0+
+- Composer
+- Node.js & npm
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd PlaneNote
+```
+
+### 2. Install Dependencies
+
+#### PHP Dependencies
+```bash
+composer install
+```
+
+#### Node Dependencies
+```bash
+npm install
+```
+
+### 3. Configure Environment
+
+Copy the example environment file and generate an app key:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Ensure your `.env` file has the correct database settings. By default, this project uses SQLite.
+
+### 4. Run Migrations
+
+```bash
+php artisan migrate
+```
+
+### 5. Run Development Servers
+
+#### Laravel Backend
+```bash
+php artisan serve
+```
+This will serve the backend on [http://localhost:8000](http://localhost:8000).
+
+#### React Frontend via Vite
+```bash
+npm run dev
+```
+This runs the Vite development server, serving the React app on [http://localhost:5173](http://localhost:5173).
+
+## Routing
+
+- **Staff Login:** [http://localhost:8000/staff/login](http://localhost:8000/staff/login)
+- **Customer Login:** [http://localhost:8000/customer/login](http://localhost:8000/customer/login)
+  (The `/customer/login` route loads the React page.)
+
+## Project Structure
+
+- **Laravel Backend:** Located in the root and `routes/`, `app/` directories.
+- **React Frontend:** Main entry is located at `resources/js/index.tsx` with pages under `resources/js/Pages/`.
+- **Styles:** Global styles in `resources/css/app.css`.
+- **Blade Shell:** SPA shell at `resources/views/app.blade.php`.
+
+## Customization
+
+- Adjust React components in `resources/js/Pages/` as needed.
+- Update backend logic and routing in Laravel (`routes/web.php`, `routes/auth.php`).
+- Modify Tailwind CSS or add additional styling in `resources/css/app.css`.
+
+## Troubleshooting
+
+- **Undefined Variable Issues:** Ensure any Inertia or unused directives are removed from Blade layout.
+- **UI Problems:** Verify that the Vite development server is running and routing is configured properly.
+- If changes aren’t reflecting, clear cache:
+  ```bash
+  php artisan config:clear
+  php artisan view:clear
+  ```
+- Verify that the SPA shell in `app.blade.php` only contains:
+  ```html
+  <div id="app"></div>
+  @viteReactRefresh
+  @vite('resources/js/index.tsx')
+  ```
+
+## License
+
+This project is open-source. Contributions are welcome!
